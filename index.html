@@ -2,616 +2,624 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy 6-Month Monthsary! ❤️</title>
+    <title>6-Month Celebration</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: radial-gradient(circle at center, #1a0b2e 0%, #05010d 100%);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            background: radial-gradient(circle at center, #0a0412 0%, #1a0b2e 100%);
+            color: #fdf5e6; font-family: 'Segoe UI', sans-serif;
+            margin: 0; min-height: 100vh; display: flex; flex-direction: column; 
+            align-items: center; justify-content: center;
+            overflow-y: auto; 
             overflow-x: hidden;
-            position: relative;
-            padding: 20px;
+            perspective: 1500px;
+            padding: 40px 20px;
         }
 
-        /* --- INTRO SCREEN / LANDING PAGE --- */
-        .intro-screen {
+        /* --- SPARKS TRAIL CANVAS --- */
+        #trailCanvas {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, #240f3e 0%, #05010d 100%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 99999; /* Higher than everything else */
-            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
-        }
-        .intro-screen.hidden {
-            transform: translateY(-100%);
-            opacity: 0;
+            width: 100vw;
+            height: 100vh;
             pointer-events: none;
-        }
-        .intro-content {
-            text-align: center;
-            max-width: 500px;
-            padding: 20px;
-        }
-        .intro-title {
-            color: #ff477e;
-            font-size: 38px;
-            margin-bottom: 15px;
-            text-shadow: 0 0 20px rgba(255, 71, 126, 0.6);
-            animation: gentlePulse 3s ease-in-out infinite;
-        }
-        .intro-text {
-            color: #dcdcdc;
-            font-size: 16px;
-            line-height: 1.6;
-            margin-bottom: 35px;
-        }
-        .start-btn {
-            background: linear-gradient(135deg, #ff477e 0%, #ff758f 100%);
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(255, 71, 126, 0.4);
-            transition: all 0.3s ease;
-            outline: none;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .start-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(255, 71, 126, 0.8);
-        }
-        .start-btn:active {
-            transform: scale(0.98);
+            z-index: 999999;
         }
 
-        /* --- CURSOR TRAIL STYLE --- */
-        .cursor-heart {
+        /* --- INTRO STYLES --- */
+        .intro-container { text-align: center; transition: opacity 0.8s; z-index: 10; }
+        .greeting-title { font-size: 3rem; margin-bottom: 1rem; color: #ffb3c1; text-shadow: 0 0 10px rgba(255,179,193,0.5); }
+        .rose-container { width: 200px; height: 200px; position: relative; margin: 0 auto 3rem auto; }
+        .petal { position: absolute; background: linear-gradient(135deg, #ff477e, #ff85a1); border-radius: 50% 50% 20% 50%; width: 80px; height: 80px; }
+        .p1 { top: 20px; left: 60px; transform: rotate(45deg); }
+        .p2 { top: 50px; left: 30px; transform: rotate(15deg); }
+        .p3 { top: 50px; left: 90px; transform: rotate(75deg); }
+        .p4 { top: 80px; left: 60px; transform: rotate(45deg); }
+        .stem { position: absolute; width: 8px; height: 60px; background: #2d5a27; bottom: 20px; left: 96px; z-index: -1; }
+        .leaf { position: absolute; width: 30px; height: 20px; background: #2d5a27; border-radius: 0 100% 0 100%; bottom: 40px; left: 104px; }
+        .celebration-btn { padding: 20px 50px; font-size: 1.5rem; background: #ff477e; color: white; border: none; border-radius: 50px; cursor: pointer; transition: 0.3s; box-shadow: 0 0 20px rgba(255,71,126,0.5); }
+        .celebration-btn:hover { transform: scale(1.05); background: #ff5c8d; }
+
+        /* --- DASHBOARD STYLES --- */
+        #dashboard { display: none; opacity: 0; transition: opacity 1s ease; text-align: center; width: 100%; }
+        
+        #emojiCanvas {
             position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            font-size: 16px;
-            user-select: none;
-            animation: floatAndFade 1s ease-out forwards;
-        }
-        @keyframes floatAndFade {
-            0% {
-                transform: translate(-50%, -50%) scale(1) translateY(0);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(0.4) translate(var(--mx), var(--my));
-                opacity: 0;
-            }
-        }
-
-        /* --- FIREWORKS ANIMATION EFFECT --- */
-        .firework {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             pointer-events: none;
             z-index: 1;
-            animation: explode 2s ease-out infinite;
-        }
-        @keyframes explode {
-            0% {
-                transform: translate(0, 0) scale(1);
-                opacity: 1;
-                box-shadow: 
-                    0 0 #ff477e, 0 0 #ff477e, 0 0 #ff477e, 0 0 #ff477e,
-                    0 0 #00f0ff, 0 0 #00f0ff, 0 0 #00f0ff, 0 0 #00f0ff,
-                    0 0 #ffb3c1, 0 0 #ffb3c1, 0 0 #ffb3c1, 0 0 #ffb3c1;
-            }
-            100% {
-                opacity: 0;
-                box-shadow: 
-                    -80px -80px #ff477e, 80px -80px #ff477e, -80px 80px #ff477e, 80px 80px #ff477e,
-                    -120px 0px #00f0ff, 120px 0px #00f0ff, 0px -120px #00f0ff, 0px 120px #00f0ff,
-                    -60px -100px #ffb3c1, 60px -100px #ffb3c1, -60px 100px #ffb3c1, 60px 100px #ffb3c1;
-                transform: translate(var(--x), var(--y)) scale(0.5);
-            }
         }
 
-        h1 {
-            color: #ff477e;
-            font-size: 34px;
-            margin-top: 20px;
-            margin-bottom: 5px;
-            text-align: center;
-            z-index: 10;
-            text-shadow: 0 0 15px rgba(255, 71, 126, 0.6);
-        }
-        .subtitle {
-            color: #b3b3b3;
-            font-size: 16px;
-            margin-bottom: 30px;
-            text-align: center;
-            z-index: 10;
-        }
-
-        /* --- DASHBOARD CONTAINER --- */
-        .dashboard-container {
-            display: flex;
+        /* --- INTEGRATED MUSIC PLAYER (TOP OF ENVELOPE DASHBOARD) --- */
+        .dashboard-music-container {
+            margin-bottom: 25px;
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            gap: 50px;
-            max-width: 1200px;
-            width: 100%;
-            margin: auto;
-            z-index: 10;
+            gap: 15px;
+            background: rgba(255, 71, 126, 0.15);
+            border: 2px solid rgba(255, 133, 161, 0.4);
+            padding: 10px 24px;
+            border-radius: 40px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 25px rgba(255, 71, 126, 0.2);
             position: relative;
-            min-height: 550px;
-            perspective: 1200px;
+            z-index: 100;
         }
-
-        .side-column {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-            flex: 1;
-            max-width: 280px;
-            transform-style: preserve-3d;
-        }
-
-        /* --- CENTRAL FLOWER BOUQUET --- */
-        .center-flower-zone {
-            position: relative;
-            width: 300px;
-            height: 300px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 15;
-        }
-        .bouquet {
-            position: relative;
-            width: 180px;
-            height: 180px;
-            background: linear-gradient(135deg, #ff758f 0%, #ff85a1 100%);
+        .music-toggle-btn {
+            background: #ff477e;
+            border: none;
+            color: white;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            box-shadow: 0 0 40px rgba(255, 71, 126, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: gentlePulse 4s ease-in-out infinite;
-        }
-        .bouquet-flowers {
-            font-size: 45px;
-            text-align: center;
-            line-height: 1.2;
-            cursor: default;
-            user-select: none;
-        }
-        .flower-tag {
-            position: absolute;
-            bottom: -25px;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 6px 16px;
-            border-radius: 20px;
-            color: #ff477e;
-            font-weight: bold;
-            font-size: 14px;
-            white-space: nowrap;
-            box-shadow: 0 4px 15px rgba(255,71,126,0.3);
-        }
-        @keyframes gentlePulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.06); }
-        }
-
-        /* --- 3D ENVELOPE DESIGN --- */
-        .envelope-wrapper {
-            position: relative;
-            width: 100%;
-            height: 130px;
+            font-size: 1.2rem;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(255,71,126,0.4);
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .music-toggle-btn:hover { transform: scale(1.1); background: #ff5c8d; }
+        .music-text { font-size: 0.95rem; font-weight: 600; color: #ffb3c1; letter-spacing: 0.5px; }
+
+        .dashboard-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 40px; position: relative; z-index: 5; }
+        .dashboard-layout { display: flex; justify-content: center; align-items: center; gap: 60px; transform-style: preserve-3d; position: relative; z-index: 5; }
+        
+        .column { display: flex; flex-direction: column; gap: 35px; transform-style: preserve-3d; }
+        .left-col { transform: rotateY(15deg); }
+        .right-col { transform: rotateY(-15deg); }
+
+        .center-col { display: flex; flex-direction: column; align-items: center; gap: 35px; z-index: 20; }
+
+        /* --- FLOATING LETTER CARDS --- */
+        .float-wrapper { 
+            position: relative; 
             transform-style: preserve-3d;
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: float-card 5s ease-in-out infinite;
+        }
+        
+        .column .float-wrapper:nth-child(1) { animation-delay: 0s; }
+        .column .float-wrapper:nth-child(2) { animation-delay: -1.5s; }
+        .column .float-wrapper:nth-child(3) { animation-delay: -3s; }
+
+        @keyframes float-card {
+            0%, 100% { transform: translateY(0) rotateX(0deg); }
+            50% { transform: translateY(-15px) rotateX(3deg); }
         }
 
-        /* 3D Faces towards the middle flower */
-        .left-side .envelope-wrapper {
-            transform: rotateY(25deg);
-            transform-origin: right center;
+        .letter-card {
+            position: relative;
+            width: 260px;
+            height: 110px;
+            background: linear-gradient(135deg, rgba(255, 71, 126, 0.15) 0%, rgba(26, 11, 46, 0.8) 100%);
+            border: 2px solid rgba(255, 133, 161, 0.4);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(255, 71, 126, 0.2);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
         }
-        .right-side .envelope-wrapper {
-            transform: rotateY(-25deg);
+        .letter-card::before {
+            content: ''; position: absolute; inset: -2px; border-radius: 16px;
+            background: linear-gradient(45deg, #ff477e, #ff85a1, transparent, #ff477e);
+            z-index: -1; opacity: 0.3; transition: opacity 0.4s;
+        }
+        .letter-card:hover {
+            transform: scale(1.08) translateZ(20px); border-color: #ff477e;
+            box-shadow: 0 15px 45px rgba(255, 71, 126, 0.5);
+        }
+        .letter-card:hover::before { opacity: 1; }
+        .card-title { font-size: 1.05rem; font-weight: 600; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .card-icon { font-size: 1.6rem; filter: drop-shadow(0 2px 8px rgba(255,71,126,0.4)); }
+
+        /* --- PROMINENT NEXT BUTTON --- */
+        .next-btn-container { position: relative; }
+        .next-part-btn { padding: 12px 30px; font-size: 1rem; background: #ff85a1; color: #1a0b2e; border: none; border-radius: 30px; cursor: pointer; transition: 0.3s; font-weight: bold; box-shadow: 0 4px 20px rgba(255,133,161,0.5); white-space: nowrap; }
+        .next-part-btn:hover { background: #ff477e; color: white; transform: scale(1.05); }
+
+        /* --- PART 3 FIREWORKS SCREEN --- */
+        #part3 { 
+            display: none; opacity: 0; transition: opacity 1s ease; 
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
+            background: #05020a; z-index: 9999; overflow: hidden;
+        }
+        #fwCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+        /* --- POP-UP DYNAMIC LYRICS BOX (BOTTOM LEFT CORNER) --- */
+        .lyrics-box {
+            position: absolute;
+            bottom: 50px;
+            left: 50px;
+            max-width: 75%;
+            z-index: 10000;
+            pointer-events: none;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .lyric-line {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(255, 71, 126, 0.9), 0 3px 6px rgba(0,0,0,0.9);
+            opacity: 0;
+            transform: scale(0.6) translateY(20px);
+            transition: opacity 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 10px;
             transform-origin: left center;
         }
-
-        /* Envelope Base Pocket */
-        .envelope-pocket {
-            width: 100%;
-            height: 100%;
-            background: #fceade;
-            border: 2px solid #e3beaa;
-            border-radius: 4px 4px 8px 8px;
-            position: relative;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transform-style: preserve-3d;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Triangle Top Flap */
-        .envelope-pocket::after {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            width: calc(100% + 4px);
-            height: 0;
-            border-left: 135px solid transparent;
-            border-right: 135px solid transparent;
-            border-top: 65px solid #ebd0be;
-            transform-origin: top center;
-            transition: transform 0.4s ease 0.2s, border-top-color 0.4s;
-            z-index: 4;
-        }
-
-        .envelope-pocket h3 {
-            color: #a65b46;
-            font-size: 18px;
-            margin-bottom: 2px;
-            z-index: 5;
-        }
-        .wax-seal {
-            font-size: 26px;
-            z-index: 6;
-            margin-top: 5px;
-            transition: transform 0.3s ease;
-        }
-        .envelope-wrapper:hover .wax-seal {
-            transform: scale(1.15);
-        }
-
-        /* --- THE SLIDING PAPER LETTER --- */
-        .letter-paper {
-            position: absolute;
-            width: 90%;
-            height: 85%;
-            background: #fffdf2;
-            left: 5%;
-            bottom: 5%;
-            border-radius: 4px;
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.05);
-            padding: 15px;
-            overflow: hidden;
-            z-index: 2;
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), height 0.5s, width 0.5s, left 0.5s;
-            pointer-events: none;
-            border: 1px solid #ddd;
-        }
-        
-        .paper-content {
-            opacity: 0;
-            color: #333;
-            transition: opacity 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        /* --- ZOOMED & OPENED LIGHTBOX MODAL STATE --- */
-        .envelope-wrapper.zoomed {
-            z-index: 100;
-        }
-        
-        .envelope-wrapper.zoomed .envelope-pocket {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -30%) rotateY(0deg) scale(1.1) !important;
-            width: 340px;
-            height: 200px;
-            z-index: 100;
-        }
-
-        /* Open state: Flip flap up */
-        .envelope-wrapper.opened .envelope-pocket::after {
-            transform: rotateX(180deg);
-            border-top-color: #fceade;
-            z-index: 1;
-            transition: transform 0.4s ease 0s;
-        }
-
-        /* Open state: Slide paper completely clear out of the envelope */
-        .envelope-wrapper.opened .letter-paper {
-            transform: translateY(-230px);
-            height: 380px;
-            width: 320px;
-            left: 10px;
-            z-index: 105;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            pointer-events: auto;
-            background-image: linear-gradient(#eef, #fff 95%);
-            border: 2px solid #f2e2be;
-            padding: 25px 20px;
-        }
-
-        .envelope-wrapper.opened .paper-content {
+        .lyric-line.active {
             opacity: 1;
+            transform: scale(1) translateY(0);
         }
-
-        .paper-content h4 {
-            color: #ff477e;
-            font-size: 18px;
-            margin-bottom: 12px;
-            text-align: center;
-            border-bottom: 1px dashed #ffb3c1;
-            padding-bottom: 5px;
-        }
-        .paper-content p {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #444;
-            text-align: left;
-            flex-grow: 1;
-        }
-        .close-btn {
-            font-size: 11px;
-            color: #ff477e;
-            text-align: center;
-            margin-top: 15px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Dark Dimming Backdrop Layer */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(5, 1, 13, 0.75);
-            backdrop-filter: blur(6px);
-            z-index: 90;
-            display: none;
+        .lyric-line.old {
             opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-        .overlay.active { 
-            display: block; 
-            opacity: 1; 
+            transform: scale(0.9) translateY(-25px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
-        @media (max-width: 850px) {
-            .dashboard-container { flex-direction: column; gap: 30px; }
-            .side-column { max-width: 100%; width: 100%; }
-            .left-side .envelope-wrapper, .right-side .envelope-wrapper { transform: none; }
-            .center-flower-zone { order: -1; margin-bottom: 10px; }
-            .envelope-wrapper.zoomed .envelope-pocket { transform: translate(-50%, -45%) scale(1) !important; }
+        /* --- OVERLAY POPUP FOR FRONT-OF-SCREEN PAPER --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 4, 18, 0.85); backdrop-filter: blur(8px);
+            z-index: 99999; display: flex; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
         }
+        .modal-paper {
+            background: #fffdf5; color: #3d271d; width: 450px; max-width: 90%;
+            padding: 40px; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            transform: translateY(50px) scale(0.9); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.2);
+            text-align: left; line-height: 1.6; border-left: 5px solid #ff477e; position: relative;
+        }
+        .modal-paper h3 { margin-bottom: 15px; color: #ff477e; font-size: 1.5rem; }
+        .close-hint { margin-top: 25px; text-align: center; color: #aaa; font-size: 0.85rem; font-style: italic; }
+
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        .modal-overlay.active .modal-paper { transform: translateY(0) scale(1); }
+
+        .center-flower { width: 120px; height: 120px; background: #ff477e; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 40px; box-shadow: 0 0 30px #ff477e; margin: 0; }
+        .fade-out { opacity: 0; pointer-events: none; }
+        .fade-in { opacity: 1 !important; }
     </style>
 </head>
 <body>
 
-    <div class="intro-screen" id="introScreen">
-        <div class="intro-content">
-            <h2 class="intro-title">Hey You... ❤️</h2>
-            <p class="intro-text">I put together something completely unique to celebrate us and the amazing journey we've shared so far. I hope it brings a big smile to your face!</p>
-            <button class="start-btn" onclick="startExperience()">Open My Gift</button>
+    <audio id="bgSong" loop src=""></audio>
+
+    <canvas id="trailCanvas"></canvas>
+
+    <div class="intro-container" id="intro">
+        <h1 class="greeting-title">To my Dearest Love...</h1>
+        <div class="rose-container">
+            <div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div>
+            <div class="stem"></div><div class="leaf"></div>
         </div>
+        <button class="celebration-btn" onclick="goToCelebration()">Click here my love</button>
     </div>
 
-    <div class="firework" style="top: 20%; left: 15%; --x: -40px; --y: -60px; animation-delay: 0s; background: #ff477e;"></div>
-    <div class="firework" style="top: 15%; left: 80%; --x: 50px; --y: -40px; animation-delay: 0.5s; background: #00f0ff;"></div>
-    <div class="firework" style="top: 60%; left: 10%; --x: -30px; --y: 50px; animation-delay: 1s; background: #ffb3c1;"></div>
-    <div class="firework" style="top: 70%; left: 85%; --x: 60px; --y: 30px; animation-delay: 1.4s; background: #ffa3b1;"></div>
+    <div id="dashboard">
+        <canvas id="emojiCanvas"></canvas>
 
-    <h1>Happy 6-Month Monthsary! ❤️</h1>
-    <p class="subtitle">Tap an envelope to pick it up, then tap it again to slide out the letter...</p>
+        <div class="dashboard-music-container">
+            <button class="music-toggle-btn" id="musicToggleBtn" onclick="toggleMusic()">▶</button>
+            <div class="music-text" id="musicStatusText">Play "Marvin Gaye" 🎵</div>
+        </div>
 
-    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1 style="color: #ff85a1; font-size: 2.5rem; text-shadow: 0 0 15px rgba(255,133,161,0.3);">Happy 6-Month Monthsary! ❤️</h1>
+            <p style="color: #bbb; margin-top: 8px;">Tap a dynamic floating capsule to look inside...</p>
+        </div>
         
-        <div class="side-column left-side">
-            <div class="envelope-wrapper" onclick="handleEnvelopeClick(event, this)">
-                <div class="envelope-pocket">
-                    <h3>My Happiness</h3>
-                    <div class="wax-seal">💝</div>
-                    <div class="letter-paper">
-                        <div class="paper-content">
-                            <h4>You Make Me So Happy 💕</h4>
-                            <p>I just want to start by telling you how incredibly happy you make me. Before you came along, life was just normal, but now every day feels bright and meaningful. Your smile, your laugh, and just your presence can turn my whole day around. You are my true source of happiness.</p>
-                            <div class="close-btn">(Tap anywhere to close)</div>
-                        </div>
+        <div class="dashboard-layout">
+            <div class="column left-col">
+                <div class="float-wrapper">
+                    <div class="letter-card" onclick="openLetter(1)">
+                        <span class="card-icon">🎁</span>
+                        <span class="card-title">My Happiness</span>
+                    </div>
+                </div>
+                <div class="float-wrapper">
+                    <div class="letter-card" onclick="openLetter(2)">
+                        <span class="card-icon">💖</span>
+                        <span class="card-title">Opening My World</span>
+                    </div>
+                </div>
+                <div class="float-wrapper">
+                    <div class="letter-card" onclick="openLetter(3)">
+                        <span class="card-icon">❤️</span>
+                        <span class="card-title">Growing Up</span>
                     </div>
                 </div>
             </div>
 
-            <div class="envelope-wrapper" onclick="handleEnvelopeClick(event, this)">
-                <div class="envelope-pocket">
-                    <h3>Opening My World</h3>
-                    <div class="wax-seal">💖</div>
-                    <div class="letter-paper">
-                        <div class="paper-content">
-                            <h4>An Exposed Life 🚀</h4>
-                            <p>Being with you has completely exposed me to a better version of life. You've opened my eyes to so many new ideas, perspectives, and beautiful ways of seeing the world. I feel like my world has grown so much bigger and more exciting because you are in it.</p>
-                            <div class="close-btn">(Tap anywhere to close)</div>
-                        </div>
-                    </div>
+            <div class="center-col">
+                <div class="center-flower">🌸</div>
+                <div class="next-btn-container">
+                    <button class="next-part-btn" onclick="goToPartThree()">Next Part →</button>
                 </div>
             </div>
 
-            <div class="envelope-wrapper" onclick="handleEnvelopeClick(event, this)">
-                <div class="envelope-pocket">
-                    <h3>Growing Up</h3>
-                    <div class="wax-seal">❤️</div>
-                    <div class="letter-paper">
-                        <div class="paper-content">
-                            <h4>Maturing with You 🤝</h4>
-                            <p>These past 6 months have taught me so much about love and life. Loving you has genuinely made me a more mature person. I find myself thinking ahead, taking things more seriously, and wanting to build a real, stable future because you deserve the absolute best version of me.</p>
-                            <div class="close-btn">(Tap anywhere to close)</div>
-                        </div>
+            <div class="column right-col">
+                <div class="float-wrapper">
+                    <div class="letter-card" onclick="openLetter(4)">
+                        <span class="card-icon">💕</span>
+                        <span class="card-title">Our Laughs</span>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="center-flower-zone">
-            <div class="bouquet">
-                <div class="bouquet-flowers">🌸🌹🌷<br>🌻🌺💐</div>
-            </div>
-            <div class="flower-tag">For My Favorite Person 🌸</div>
-        </div>
-
-        <div class="side-column right-side">
-            <div class="envelope-wrapper" onclick="handleEnvelopeClick(event, this)">
-                <div class="envelope-pocket">
-                    <h3>Our Laughs</h3>
-                    <div class="wax-seal">💕</div>
-                    <div class="letter-paper">
-                        <div class="paper-content">
-                            <h4>So Much Funnier 🃏</h4>
-                            <p>You make my life so much funnier! We have our own inside jokes, silly moments, and uncontainable laughter that I wouldn't trade for anything. You bring out my lighthearted side, and I love how we can just be completely goofy together without a care in the world.</p>
-                            <div class="close-btn">(Tap anywhere to close)</div>
-                        </div>
+                <div class="float-wrapper">
+                    <div class="letter-card" onclick="openLetter(5)">
+                        <span class="card-icon">✨</span>
+                        <span class="card-title">Transformation</span>
                     </div>
                 </div>
-            </div>
-
-            <div class="envelope-wrapper" onclick="handleEnvelopeClick(event, this)">
-                <div class="envelope-pocket">
-                    <h3>Transformation</h3>
-                    <div class="wax-seal">✨</div>
-                    <div class="letter-paper">
-                        <div class="paper-content">
-                            <h4>How I've Changed 💎</h4>
-                            <p>When I look back at who I was 6 months ago versus who I am today, the change is undeniable. You didn't just step into my life; you upgraded it. You've brought out a depth, a joy, and a positive energy in me that I never knew I had inside.</p>
-                            <div class="close-btn">(Tap anywhere to close)</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="envelope-wrapper" onclick="handleEnvelopeClick(event, this)">
-                <div class="envelope-pocket">
-                    <h3>6 Months Together</h3>
-                    <div class="wax-seal">💌</div>
-                    <div class="letter-paper">
-                        <div class="paper-content">
-                            <h4>Happy 6-Month Monthsary! 🎉</h4>
-                            <p>Happy 6-Month Monthsary, my love! Thank you for the happiness, the growth, the mind-opening experiences, and the endless laughs. Half a year down, and I am completely ready for all the maturity, fun, and new milestones we'll cross next. I love you so much!</p>
-                            <div class="close-btn">(Tap anywhere to close)</div>
-                        </div>
+                <div class="float-wrapper">
+                    <div class="letter-card" onclick="openLetter(6)">
+                        <span class="card-icon">💌</span>
+                        <span class="card-title">6 Months Together</span>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 
-    <div class="overlay" id="overlay" onclick="closeActiveEnvelope()"></div>
+    <div id="part3">
+        <div class="lyrics-box" id="lyricsBox"></div>
+        <canvas id="fwCanvas"></canvas>
+    </div>
+
+    <div class="modal-overlay" id="letterModal" onclick="closeLetter()">
+        <div class="modal-paper" onclick="event.stopPropagation()">
+            <h3 id="modalTitle">Letter Title</h3>
+            <p id="modalContent">Letter text content goes here...</p>
+            <div class="close-hint">Click anywhere outside this paper to close</div>
+        </div>
+    </div>
 
     <script>
-        let activeWrapper = null;
+        const letterData = {
+            1: { title: "My Happiness 🎁", text: "Before you, days just passed by. But now, every single day is filled with pure joy. You have this magical way of making me smile even on my hardest days. You are my true happy place." },
+            2: { title: "Opening My World 💖", text: "You tore down every wall I ever built. With you, I can share my deepest thoughts, fears, and wildest dreams without a single worry. You made me feel completely safe to just be myself." },
+            3: { title: "Growing Up ❤️", text: "Loving you has made me want to be a better person. We learn together, laugh through our clumsy mistakes, and grow stronger side by side. I love the path of life we are building together." },
+            4: { title: "Our Laughs 💕", text: "From inside jokes to laughing until our stomachs hurt over absolutely nothing, our shared joy is my favorite melody. Your laugh is easily the most beautiful sound in the universe." },
+            5: { title: "Transformation ✨", text: "You didn't change me; you revealed the happiest version of me. What I love most about you is your gentle heart, your beautiful mind, and the unconditional warmth you give me every single day." },
+            6: { title: "6 Months Together 💌", text: "Happy 6th Monthsary, my darling person! These 180 days have been the most beautiful chapter of my life story. Cheers to half a year of loving you, and to our endless forever ahead." }
+        };
 
-        // --- INTRO BUTTON CONTROLLER ---
-        function startExperience() {
-            document.getElementById('introScreen').classList.add('hidden');
+        // Custom Timed Lyrics (Triggers relative to audio timeline position)
+        const songLyrics = [
+            { time: 0.8, text: "Let's Marvin Gaye and get it on... 🎤" },
+            { time: 4.2, text: "You got the healing that I want... ❤️" },
+            { time: 8.0, text: "Just like they say it in the song... 🎵" },
+            { time: 11.5, text: "Until the dawn, let's Marvin Gaye and get it on... ✨" },
+            { time: 16.2, text: "We got to leave that world behind... 🌎" },
+            { time: 19.8, text: "Don't you know I'm running low on time... ⏳" },
+            { time: 23.4, text: "There's so much answer in your eyes... 💕" },
+            { time: 27.1, text: "And there is nothing holding back my mind... 💖" }
+        ];
+
+        let audioCtx = null;
+        let noiseBuffer = null;
+        let lyricsInterval = null;
+        const myAudio = document.getElementById('bgSong');
+        const toggleBtn = document.getElementById('musicToggleBtn');
+        const statusText = document.getElementById('musicStatusText');
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                createNoiseBuffer();
+            }
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
         }
 
-        // --- CURSOR TRAIL LOGIC ---
-        const heartEmojis = ['❤️', '💖', '💕', '💝', '🌸', '✨'];
-        
-        document.addEventListener('mousemove', function(e) {
-            if (Math.random() > 0.15) return; 
-            createHeartTrail(e.clientX, e.clientY);
-        });
-
-        document.addEventListener('touchmove', function(e) {
-            if (Math.random() > 0.15) return;
-            const touch = e.touches[0];
-            createHeartTrail(touch.clientX, touch.clientY);
-        });
-
-        function createHeartTrail(x, y) {
-            const heart = document.createElement('div');
-            heart.classList.add('cursor-heart');
-            
-            heart.innerText = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
-            heart.style.left = x + 'px';
-            heart.style.top = y + 'px';
-            heart.style.fontSize = Math.floor(Math.random() * 12 + 12) + 'px';
-
-            const moveX = (Math.random() - 0.5) * 80;
-            const moveY = (Math.random() - 0.5) * 80 - 40; 
-            heart.style.setProperty('--mx', `${moveX}px`);
-            heart.style.setProperty('--my', `${moveY}px`);
-
-            document.body.appendChild(heart);
-
-            setTimeout(() => {
-                heart.remove();
-            }, 1000);
-        }
-
-        // --- ENVELOPE CONTROLLER ---
-        function handleEnvelopeClick(event, wrapper) {
-            event.stopPropagation();
-            const overlay = document.getElementById('overlay');
-
-            if (wrapper.classList.contains('opened')) {
-                closeActiveEnvelope();
-                return;
-            }
-
-            if (activeWrapper && activeWrapper !== wrapper) {
-                closeActiveEnvelope();
-                setTimeout(() => { handleEnvelopeClick(event, wrapper); }, 350);
-                return;
-            }
-
-            if (!wrapper.classList.contains('zoomed')) {
-                wrapper.classList.add('zoomed');
-                overlay.classList.add('active');
-                activeWrapper = wrapper;
+        // Play and Stop Music State Engine
+        function toggleMusic() {
+            initAudio();
+            if (myAudio.paused) {
+                myAudio.play().catch(e => console.log("Audio play request handled: ", e));
+                toggleBtn.innerText = "⏸";
+                statusText.innerText = "Playing music... 🎵";
+                startLyricsEngine();
             } else {
-                wrapper.classList.add('opened');
+                myAudio.pause();
+                toggleBtn.innerText = "▶";
+                statusText.innerText = "Music stopped ☕";
+                stopLyricsEngine();
             }
         }
 
-        function closeActiveEnvelope() {
-            const overlay = document.getElementById('overlay');
-            if (activeWrapper) {
-                activeWrapper.classList.remove('opened');
-                
-                const closingWrapper = activeWrapper;
-                activeWrapper = null;
-                overlay.classList.remove('active');
-
-                setTimeout(() => {
-                    if (closingWrapper) {
-                        closingWrapper.classList.remove('zoomed');
-                    }
-                }, 400);
+        function createNoiseBuffer() {
+            const bufferSize = audioCtx.sampleRate * 1.5; 
+            noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+            const output = noiseBuffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+                output[i] = Math.random() * 2 - 1;
             }
+        }
+
+        function playLaunchSound() {
+            if (!audioCtx || audioCtx.state === 'suspended') return;
+            let osc = audioCtx.createOscillator();
+            let gain = audioCtx.createGain();
+            let filter = biquadFilter = audioCtx.createBiquadFilter();
+            osc.connect(filter); filter.connect(gain); gain.connect(audioCtx.destination);
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(45, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(180, audioCtx.currentTime + 0.6);
+            filter.type = 'lowpass'; filter.frequency.setValueAtTime(250, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.6);
+            osc.start(); osc.stop(audioCtx.currentTime + 0.6);
+        }
+
+        function playExplosionSound() {
+            if (!audioCtx || !noiseBuffer || audioCtx.state === 'suspended') return;
+            const now = audioCtx.currentTime;
+            let bassOsc = audioCtx.createOscillator(); let bassGain = audioCtx.createGain();
+            bassOsc.connect(bassGain); bassGain.connect(audioCtx.destination);
+            bassOsc.type = 'sine'; bassOsc.frequency.setValueAtTime(95, now);
+            bassOsc.frequency.exponentialRampToValueAtTime(15, now + 0.7);
+            bassGain.gain.setValueAtTime(0.4, now); bassGain.gain.exponentialRampToValueAtTime(0.001, now + 0.7);
+            bassOsc.start(now); bassOsc.stop(now + 0.7);
+
+            let noiseSource = audioCtx.createBufferSource(); noiseSource.buffer = noiseBuffer;
+            let noiseFilter = audioCtx.createBiquadFilter(); let noiseGain = audioCtx.createGain();
+            noiseSource.connect(noiseFilter); noiseFilter.connect(noiseGain); noiseGain.connect(audioCtx.destination);
+            noiseFilter.type = 'bandpass'; noiseFilter.frequency.setValueAtTime(800, now);
+            noiseFilter.frequency.exponentialRampToValueAtTime(120, now + 0.5);
+            noiseGain.gain.setValueAtTime(0.15, now); noiseGain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+            noiseGain.gain.linearRampToValueAtTime(0.001, now + 0.5);
+            noiseSource.start(now); noiseSource.stop(now + 0.5);
+        }
+
+        function goToCelebration() {
+            initAudio();
+            document.getElementById('intro').classList.add('fade-out');
+            setTimeout(() => {
+                document.getElementById('intro').style.display = 'none';
+                const dash = document.getElementById('dashboard');
+                dash.style.display = 'block';
+                setTimeout(() => {
+                    dash.classList.add('fade-in');
+                    initDashboardBackground();
+                }, 100);
+            }, 800);
+        }
+
+        function openLetter(id) {
+            document.getElementById('modalTitle').innerText = letterData[id].title;
+            document.getElementById('modalContent').innerText = letterData[id].text;
+            document.getElementById('letterModal').classList.add('active');
+        }
+
+        function closeLetter() {
+            document.getElementById('letterModal').classList.remove('active');
+        }
+
+        function goToPartThree() {
+            initAudio();
+            document.getElementById('dashboard').classList.remove('fade-in');
+            document.getElementById('dashboard').classList.add('fade-out');
+            setTimeout(() => {
+                document.getElementById('dashboard').style.display = 'none';
+                const p3 = document.getElementById('part3');
+                p3.style.display = 'block';
+                setTimeout(() => {
+                    p3.classList.add('fade-in');
+                    initFireworks();
+                }, 50);
+            }, 800);
+        }
+
+        /* --- POP-UP LYRICS MANAGEMENT TIMING SYSTEM --- */
+        function startLyricsEngine() {
+            if (lyricsInterval) clearInterval(lyricsInterval);
+            const container = document.getElementById('lyricsBox');
+            
+            lyricsInterval = setInterval(() => {
+                if (myAudio.paused) return;
+                let currentPos = myAudio.currentTime;
+
+                songLyrics.forEach((line) => {
+                    if (!line.triggered && currentPos >= line.time) {
+                        line.triggered = true;
+                        
+                        const el = document.createElement('div');
+                        el.className = 'lyric-line';
+                        el.innerText = line.text;
+                        container.appendChild(el);
+
+                        // Trigger snapping pop-up scale animation
+                        setTimeout(() => el.classList.add('active'), 50);
+
+                        // Beautifully shrink and float upward out of sight
+                        setTimeout(() => {
+                            el.classList.remove('active');
+                            el.classList.add('old');
+                            setTimeout(() => el.remove(), 600);
+                        }, 3300);
+                    }
+                });
+            }, 100);
+        }
+
+        function stopLyricsEngine() {
+            if (lyricsInterval) {
+                clearInterval(lyricsInterval);
+                lyricsInterval = null;
+            }
+        }
+
+        /* --- MAGIC CURSOR / SWIPE SPARKLE SYSTEM --- */
+        (function initMagicCursor() {
+            const canvas = document.getElementById('trailCanvas');
+            const ctx = canvas.getContext('2d');
+            function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+            window.addEventListener('resize', resize); resize();
+            let sparkles = [];
+
+            class Sparkle {
+                constructor(x, y) {
+                    this.x = x; this.y = y;
+                    this.size = Math.random() * 4 + 2;
+                    this.speedX = (Math.random() - 0.5) * 2.5;
+                    this.speedY = (Math.random() - 0.5) * 2.5 - 0.5;
+                    this.alpha = 1; this.decay = Math.random() * 0.02 + 0.02;
+                    this.color = Math.random() > 0.5 ? `hsla(343, 100%, 75%, ` : `hsla(45, 100%, 70%, `;
+                }
+                update() {
+                    this.x += this.speedX; this.y += this.speedY; this.alpha -= this.decay;
+                    return this.alpha > 0;
+                }
+                draw() {
+                    ctx.save(); ctx.globalAlpha = this.alpha;
+                    ctx.fillStyle = this.color + this.alpha + ')';
+                    ctx.shadowBlur = 6; ctx.shadowColor = '#ff477e';
+                    ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill(); ctx.restore();
+                }
+            }
+            function addSparkles(x, y, count = 2) {
+                for (let i = 0; i < count; i++) sparkles.push(new Sparkle(x, y));
+            }
+            window.addEventListener('mousemove', (e) => addSparkles(e.clientX, e.clientY, 1));
+            window.addEventListener('touchmove', (e) => {
+                if (e.touches.length > 0) addSparkles(e.touches[0].clientX, e.touches[0].clientY, 2);
+            }, { passive: true });
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                sparkles = sparkles.filter(s => {
+                    const active = s.update();
+                    if (active) s.draw();
+                    return active;
+                });
+                requestAnimationFrame(animate);
+            }
+            animate();
+        })();
+
+        /* --- DASHBOARD BACKGROUND EMOJI FLOATER SYSTEM --- */
+        function initDashboardBackground() {
+            const canvas = document.getElementById('emojiCanvas');
+            const ctx = canvas.getContext('2d');
+            function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+            window.addEventListener('resize', resize); resize();
+            const emojis = ['🌸', '💖', '❤️', '🌹', '💕', '🌷', '💘'];
+            let pool = [];
+
+            class FloatingEmoji {
+                constructor() { this.reset(); this.y = Math.random() * canvas.height; }
+                reset() {
+                    this.x = Math.random() * canvas.width; this.y = canvas.height + 40;
+                    this.char = emojis[Math.floor(Math.random() * emojis.length)];
+                    this.speed = Math.random() * 1.2 + 0.6; this.size = Math.random() * 15 + 18;
+                    this.opacity = 0; this.fadeSpeed = 0.015;
+                    this.wobble = Math.random() * 5; this.wobbleSpeed = Math.random() * 0.02 + 0.01;
+                }
+                update() {
+                    this.y -= this.speed; this.wobble += this.wobbleSpeed; this.x += Math.sin(this.wobble) * 0.5;
+                    if (this.y < canvas.height - 50) { if (this.opacity < 0.6) this.opacity += this.fadeSpeed; }
+                    if (this.y < 100) this.opacity -= this.fadeSpeed;
+                    if (this.y < -40 || (this.opacity <= 0 && this.y < 200)) this.reset();
+                }
+                draw() {
+                    ctx.save(); ctx.globalAlpha = Math.max(0, this.opacity);
+                    ctx.font = `${this.size}px sans-serif`; ctx.fillText(this.char, this.x, this.y); ctx.restore();
+                }
+            }
+            for(let i=0; i<30; i++) pool.push(new FloatingEmoji());
+            function run() {
+                if (document.getElementById('dashboard').style.display === 'none') return;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                pool.forEach(item => { item.update(); item.draw(); });
+                requestAnimationFrame(run);
+            }
+            run();
+        }
+
+        /* --- PART 3: FIREWORKS SYSTEM --- */
+        function initFireworks() {
+            const canvas = document.getElementById('fwCanvas');
+            const ctx = canvas.getContext('2d');
+            function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+            window.addEventListener('resize', resize); resize();
+            let particles = []; let fireworks = [];
+
+            class Firework {
+                constructor() {
+                    this.x = Math.random() * canvas.width; this.y = canvas.height;
+                    this.targetY = Math.random() * (canvas.height * 0.5) + canvas.height * 0.1;
+                    this.speed = 5 + Math.random() * 4; this.color = `hsl(${Math.random() * 360}, 100%, 60%)`;
+                    playLaunchSound();
+                }
+                update() {
+                    this.y -= this.speed;
+                    if (this.y <= this.targetY) { explode(this.x, this.y, this.color); return false; }
+                    return true;
+                }
+                draw() { ctx.fillStyle = this.color; ctx.fillRect(this.x, this.y, 3, 3); }
+            }
+
+            class Particle {
+                constructor(x, y, color) {
+                    this.x = x; this.y = y; this.color = color; this.angle = Math.random() * Math.PI * 2;
+                    this.speed = Math.random() * 5 + 1; this.alpha = 1; this.decay = Math.random() * 0.015 + 0.015;
+                }
+                update() {
+                    this.x += Math.cos(this.angle) * this.speed; this.y += Math.sin(this.angle) * this.speed + 0.05;
+                    this.alpha -= this.decay; return this.alpha > 0;
+                }
+                draw() {
+                    ctx.save(); ctx.globalAlpha = this.alpha; ctx.fillStyle = this.color;
+                    ctx.beginPath(); ctx.arc(this.x, this.y, 2, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+                }
+            }
+
+            function explode(x, y, color) {
+                playExplosionSound();
+                for (let i = 0; i < 60; i++) particles.push(new Particle(x, y, color));
+            }
+
+            function loop() {
+                ctx.fillStyle = 'rgba(5, 2, 10, 0.2)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+                if (Math.random() < 0.03 && fireworks.length < 4) fireworks.push(new Firework());
+                fireworks = fireworks.filter(fw => { const keep = fw.update(); if (keep) fw.draw(); return keep; });
+                particles = particles.filter(p => { const keep = p.update(); if (keep) p.draw(); return keep; });
+                requestAnimationFrame(loop);
+            }
+            loop();
         }
     </script>
 </body>
