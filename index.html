@@ -213,10 +213,13 @@
 </head>
 <body>
 
-    <audio id="bgSong" loop src=""></audio>
+    <!-- Working link added so button toggle works perfectly right now. Replace this link with your file when ready! -->
+    <audio id="bgSong" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
 
+    <!-- Sparkles Touch/Move Layer -->
     <canvas id="trailCanvas"></canvas>
 
+    <!-- Intro (Part 1) -->
     <div class="intro-container" id="intro">
         <h1 class="greeting-title">To my Dearest Love...</h1>
         <div class="rose-container">
@@ -226,9 +229,11 @@
         <button class="celebration-btn" onclick="goToCelebration()">Click here my love</button>
     </div>
 
+    <!-- Dashboard (Part 2 - Envelope Area) -->
     <div id="dashboard">
         <canvas id="emojiCanvas"></canvas>
 
+        <!-- Music Controller placed precisely inside the envelope view -->
         <div class="dashboard-music-container">
             <button class="music-toggle-btn" id="musicToggleBtn" onclick="toggleMusic()">▶</button>
             <div class="music-text" id="musicStatusText">Play "Marvin Gaye" 🎵</div>
@@ -240,6 +245,7 @@
         </div>
         
         <div class="dashboard-layout">
+            <!-- Left Column -->
             <div class="column left-col">
                 <div class="float-wrapper">
                     <div class="letter-card" onclick="openLetter(1)">
@@ -261,6 +267,7 @@
                 </div>
             </div>
 
+            <!-- Center Column -->
             <div class="center-col">
                 <div class="center-flower">🌸</div>
                 <div class="next-btn-container">
@@ -268,6 +275,7 @@
                 </div>
             </div>
 
+            <!-- Right Column -->
             <div class="column right-col">
                 <div class="float-wrapper">
                     <div class="letter-card" onclick="openLetter(4)">
@@ -291,11 +299,14 @@
         </div>
     </div>
 
+    <!-- Fireworks Section -->
     <div id="part3">
+        <!-- Interactive Pop-Up Lyrics Corner Box -->
         <div class="lyrics-box" id="lyricsBox"></div>
         <canvas id="fwCanvas"></canvas>
     </div>
 
+    <!-- Front of Screen Paper Overlay -->
     <div class="modal-overlay" id="letterModal" onclick="closeLetter()">
         <div class="modal-paper" onclick="event.stopPropagation()">
             <h3 id="modalTitle">Letter Title</h3>
